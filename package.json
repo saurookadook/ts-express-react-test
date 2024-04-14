@@ -10,8 +10,9 @@
     "scripts": {
         "install:clean": "yarn cache clean && rm -rf .yarn/ dist/ node_modules/ && yarn install",
         "build:dev": "tsc -b --verbose && webpack --mode=development",
-        "serve": "nodemon -w src --exec \"ts-node -r tsconfig-paths/register ./src/server/index.ts\"",
-        "test": "nodemon -w src --exec \"node --experimental-specifier-resolution=node --loader ./customTSNodeLoader.js src/server/index.ts\""
+        "serve": "nodemon -w src --exec \"node --experimental-specifier-resolution=node --loader ./customTSNodeLoader.js src/server/index.ts\"",
+        "start": "yarn build:dev && yarn serve",
+        "OLD_serve": "nodemon -w src --exec \"ts-node -r tsconfig-paths/register ./src/server/index.ts\""
     },
     "dependencies": {
         "cors": "^2.8.5",
