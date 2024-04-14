@@ -1,13 +1,17 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+// const path = require('path');
+// // const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const WebpackAssetsManifest = require('webpack-assets-manifest');
+// const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+import path from 'path';
+// import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackAssetsManifest from 'webpack-assets-manifest';
+import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 
 const isProduction = (envVar) => envVar == 'production';
 
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 const babelOptions = {
     presets: [
@@ -39,13 +43,13 @@ const buildConfig = (env, argv) => ({
     entry: {
         'react-vendors': ['@babel/polyfill', 'react', 'react-dom'],
         home: {
-            import: path.resolve(__dirname, 'src/client/home/entry.tsx'),
+            import: path.resolve(__dirname, './src/client/home/entry.tsx'),
             dependOn: 'react-vendors',
         },
-        login: {
-            import: path.resolve(__dirname, 'src/client/login/entry.tsx'),
-            dependOn: 'react-vendors',
-        },
+        // login: {
+        //     import: path.resolve(__dirname, './src/client/login/entry.tsx'),
+        //     dependOn: 'react-vendors',
+        // },
         // home: ['@babel/polyfill', path.resolve(__dirname, 'src/client/home/entry.tsx')],
         // login: ['@babel/polyfill', path.resolve(__dirname, 'src/client/login/entry.tsx')],
     },
@@ -120,12 +124,12 @@ const buildConfig = (env, argv) => ({
     plugins: getPlugins(argv.mode),
     resolve: {
         alias: {
-            client: path.resolve(__dirname, 'src/client'),
-            server: path.resolve(__dirname, 'src/server'),
-            types: path.resolve(__dirname, 'src/types'),
+            client: path.resolve(__dirname, './src/client'),
+            server: path.resolve(__dirname, './src/server'),
+            types: path.resolve(__dirname, './src/types'),
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+        modules: [path.resolve(__dirname, './src'), 'node_modules'],
     },
 });
 
@@ -140,7 +144,8 @@ function getPlugins(mode) {
     return isProduction(mode) ? [...commonPlugins, new WorkboxWebpackPlugin.GenerateSW()] : [...commonPlugins];
 }
 
-module.exports = (env, argv) => {
+// module.exports = (env, argv) => {
+export default (env, argv) => {
     const config = buildConfig(env, argv);
 
     // if (isProduction) {

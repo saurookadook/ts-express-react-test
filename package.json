@@ -2,9 +2,16 @@
     "name": "ts-express-react-test",
     "packageManager": "yarn@4.1.1",
     "version": "0.0.0",
+    "type": "module",
     "engines": {
         "node": "^18.18.2",
         "yarn": "^4.1.0"
+    },
+    "scripts": {
+        "install:clean": "yarn cache clean && rm -rf .yarn/ dist/ node_modules/ && yarn install",
+        "build:dev": "tsc -b --verbose && webpack --mode=development",
+        "serve": "nodemon -w src --exec \"ts-node -r tsconfig-paths/register ./src/server/index.ts\"",
+        "test": "nodemon -w src --exec \"node --experimental-specifier-resolution=node --loader ./customTSNodeLoader.js src/server/index.ts\""
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -55,6 +62,7 @@
         "prettier-eslint": "^16.1.2",
         "ts-loader": "^9.5.1",
         "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
         "typescript": "^5.3.3",
         "webpack": "^5.90.3",
         "webpack-assets-manifest": "^5.2.0",
@@ -62,5 +70,8 @@
         "webpack-dev-server": "^5.0.2",
         "webpack-node-externals": "^3.0.0",
         "workbox-webpack-plugin": "^7.0.0"
+    },
+    "browser": {
+        "ts-express-react-test": false
     }
 }

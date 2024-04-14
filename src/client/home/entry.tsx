@@ -17,7 +17,7 @@ function App({ data }: { data?: any | null }) {
     );
 }
 
-window.renderApp = async (initialPageData) => {
+(window as any).renderApp = async (initialPageData) => {
     const root = createRoot(document.getElementById('nlpssa-main'));
 
     root.render(

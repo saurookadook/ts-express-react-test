@@ -39,6 +39,7 @@
         "window": true
     },
     "rules": {
+        "@typescript-eslint/no-explicit-any": 1,
         "array-bracket-newline": [1, "consistent"],
         "array-bracket-spacing": [
             1,
@@ -143,6 +144,12 @@
             "files": ["./devServer.js", "./webpack.config.js"],
             "rules": {
                 "@typescript-eslint/no-var-requires": 0
+            }
+        },
+        {
+            "files": ["./src/client/home/entry.tsx"],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": 0
             }
         }
     ]
