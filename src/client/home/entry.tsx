@@ -1,7 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-function App({ data }: { data?: any | null }) {
+import reportWebVitals from 'client/reportWebVitals';
+
+function App({ data }: { data?: Record<string, unknown> | null }) {
+    console.log('home - App', { data });
     return (
         <div className="home">
             <header className="home-header">{`💸 🤑 💸 Welcome to NLP SSA 💸 🤑 💸`}</header>
@@ -26,3 +29,5 @@ function App({ data }: { data?: any | null }) {
         </React.StrictMode>,
     );
 };
+
+reportWebVitals();
