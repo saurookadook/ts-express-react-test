@@ -12,6 +12,7 @@
         "build:dev": "tsc -b --verbose && webpack --mode=development",
         "serve": "nodemon -w src --exec \"node --experimental-specifier-resolution=node --loader ./customTSNodeLoader.js src/server/index.ts\"",
         "start": "yarn build:dev && yarn serve",
+        "restart": "yarn install:clean && yarn build:dev && yarn serve",
         "OLD_serve": "nodemon -w src --exec \"ts-node -r tsconfig-paths/register ./src/server/index.ts\""
     },
     "dependencies": {
@@ -19,7 +20,8 @@
         "express": "^4.18.2",
         "express-handlebars": "^7.1.2",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "web-vitals": "^2.1.4"
     },
     "devDependencies": {
         "@babel/core": "^7.24.3",

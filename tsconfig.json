@@ -4,7 +4,6 @@
     "_version": "18.2.0",
     "compilerOptions": {
         "allowJs": true,
-        // "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
         "emitDeclarationOnly": false,

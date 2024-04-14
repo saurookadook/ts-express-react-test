@@ -56,6 +56,7 @@ const buildConfig = (env, argv) => ({
     output: {
         // path: path.resolve(__dirname, 'dist'),
         // filename: 'bundle.js',
+        publicPath: '/',
         path: path.resolve(__dirname, 'dist/bundles'),
         filename: '[name]-[chunkhash].min.js',
     },
@@ -103,22 +104,24 @@ const buildConfig = (env, argv) => ({
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
-    // optimization: {
-    //     splitChunks: {
-    //         commonVendors: {
-    //             test: /^.*node_modules[\/\\](?!).*$/,
-    //             name: 'nlpssaVendor',
-    //             chunks: 'initial'
-    //         },
-    //         commons: {
-    //             test: /[\/\\]src\/common[\/\\]/,
-    //             name: 'nlpssaCommon',
-    //             chunks: 'initial',
-    //             enforce: true,
-    //         }
-    //     },
-    //     minimizer: argv.mode === 'production' ? [new TerserPlugin()] : []
-    // },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commonVendors: {
+                    test: /^.*node_modules[\/\\](?!).*$/,
+                    name: 'nlpssaVendor',
+                    chunks: 'initial',
+                },
+                commons: {
+                    test: /[\/\\]src\/common[\/\\]/,
+                    name: 'nlpssaCommon',
+                    chunks: 'initial',
+                    enforce: true,
+                },
+            },
+        },
+        // minimizer: argv.mode === 'production' ? [new TerserPlugin()] : [],
+    },
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     plugins: getPlugins(argv.mode),
