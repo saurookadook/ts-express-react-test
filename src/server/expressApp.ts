@@ -19,6 +19,10 @@ expressApp.engine(
 );
 expressApp.set('views', path.join(__dirname, 'src/server/views'));
 
+if (process.env.ENV !== 'production') {
+    expressApp.use('/dist', express.static(path.join(__dirname, 'dist')));
+}
+
 expressApp.use('/', homeRouter);
 
 export default expressApp;
