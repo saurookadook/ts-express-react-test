@@ -18,13 +18,14 @@ router.use(
             console.warn(`[home route] - caught exception: ${e}`);
         }
 
-        console.log({ localsManifest: res.locals.manifest });
+        const { appJs: reactVendorsJs } = res.locals.manifest['react-vendors'];
+        console.log({ localsManifest: res.locals.manifest, appJs: res.locals.manifest['home'], reactVendorsJs });
         return res.render('index', {
             layout: 'index',
             initialPageData: JSON.stringify(initialPageData),
+            reactVendorsJs,
             ...res.locals.manifest['common'],
             ...res.locals.manifest['home'],
-            ...res.locals.manifest['react-vendors'],
         });
     }),
 );

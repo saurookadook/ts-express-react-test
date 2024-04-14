@@ -70,6 +70,7 @@
         {{else}}
             <!-- commonJs failed to load :[ -->
         {{/if}}
+        <script type="text/javascript" src="{{ reactVendorsJs }}" defer></script>
         <script type="text/javascript" src="{{ appJs }}" defer></script>
         <script>
             var initApp = function() {

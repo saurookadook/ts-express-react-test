@@ -3,10 +3,10 @@ import fs from 'fs';
 export const buildManifest = (manifest, bundlePath) => {
     return Object.entries(manifest).reduce((manifestMap, manifestEntry) => {
         const [key, value] = manifestEntry;
-        console.log(''.padStart(220, '='));
+        console.log('\n'.padStart(220, '='));
         console.log(`key: ${key}`);
-        console.log('value: \n', value);
-        console.log(''.padStart(220, '='));
+        console.log('value: ', value);
+        console.log('\n'.padEnd(220, '='));
 
         if (key.endsWith('.map')) {
             return manifestMap;
@@ -14,6 +14,7 @@ export const buildManifest = (manifest, bundlePath) => {
 
         let bundleKey;
         let [_, app, ext] = key.match(/(.*)\.(js|ts|tsx)/)!;
+        console.log('\n'.padStart(220, '='), { _, app, ext }, '\n'.padEnd(220, '='));
         if (['nlpssaVendor', 'nlpssaCommon'].includes(app)) {
             app = 'common';
             const bundle = key.includes('Common') ? 'common' : 'vendor';
@@ -34,7 +35,7 @@ export const buildManifest = (manifest, bundlePath) => {
 
 export const manifestMiddleware = (req, res, next) => {
     // TODO: should use CDN path from app-level config
-    const bundlePath = '/nlp-ssa/public';
+    const bundlePath = '/dist/bundles';
     const manifestFromJson = JSON.parse(fs.readFileSync('./dist/bundles/assets-manifest.json', { encoding: 'utf-8' }));
     res.locals.manifest = buildManifest(manifestFromJson, bundlePath);
     next();
