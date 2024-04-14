@@ -1,11 +1,6 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-// const path = require('path');
-// // const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const WebpackAssetsManifest = require('webpack-assets-manifest');
-// const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 import path from 'path';
-// import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 
@@ -14,19 +9,7 @@ const isProduction = (envVar) => envVar == 'production';
 const __dirname = path.resolve();
 
 const babelOptions = {
-    presets: [
-        '@babel/preset-env',
-        '@babel/preset-react',
-        // '@babel/preset-typescript',
-        // 'react',
-        // [
-        //     'es2015',
-        //     {
-        //         modules: false,
-        //     },
-        // ],
-        // 'es2016',
-    ],
+    presets: ['@babel/preset-env', '@babel/preset-react'],
 };
 
 const buildConfig = (env, argv) => ({
@@ -50,15 +33,11 @@ const buildConfig = (env, argv) => ({
         //     import: path.resolve(__dirname, './src/client/login/entry.tsx'),
         //     dependOn: 'react-vendors',
         // },
-        // home: ['@babel/polyfill', path.resolve(__dirname, 'src/client/home/entry.tsx')],
-        // login: ['@babel/polyfill', path.resolve(__dirname, 'src/client/login/entry.tsx')],
     },
     output: {
-        // path: path.resolve(__dirname, 'dist'),
-        // filename: 'bundle.js',
-        publicPath: '/',
-        path: path.resolve(__dirname, 'dist/bundles'),
         filename: '[name]-[chunkhash].min.js',
+        path: path.resolve(__dirname, 'dist/bundles'),
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -137,26 +116,13 @@ const buildConfig = (env, argv) => ({
 });
 
 function getPlugins(mode) {
-    const commonPlugins = [
-        // new HtmlWebpackPlugin({
-        //     template: path.resolve(__dirname, 'index.html'),
-        // }),
-        new WebpackAssetsManifest({}),
-    ];
+    const commonPlugins = [new WebpackAssetsManifest({})];
 
     return isProduction(mode) ? [...commonPlugins, new WorkboxWebpackPlugin.GenerateSW()] : [...commonPlugins];
 }
 
-// module.exports = (env, argv) => {
 export default (env, argv) => {
     const config = buildConfig(env, argv);
-
-    // if (isProduction) {
-    //     config.mode = 'production';
-    //     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
-    // } else {
-    //     config.mode = 'development';
-    // }
 
     return config;
 };
